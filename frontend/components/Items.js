@@ -18,7 +18,7 @@ const ALL_ITEMS_QUERY = gql`
 `;
 
 const Center = styled.div`
-  teext-align: center;
+  text-align: center;
 `;
 
 const ItemsList = styled.div`

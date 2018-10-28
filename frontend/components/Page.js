@@ -11,7 +11,7 @@ const theme = {
   offWhite: '#EDEDED',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
-}
+};
 
 const StyledPage = styled.div`
   background: white;
@@ -27,8 +27,7 @@ const Inner = styled.div`
 injectGlobal`
   @font-face {
     font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2');
-    format('woff2');
+    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
   }
@@ -36,7 +35,7 @@ injectGlobal`
     box-sizing: border-box;
     font-size: 10px;
   }
-  *, *:before, *.after {
+  *, *:before, *:after {
     box-sizing: inherit;
   }
   body {
@@ -59,13 +58,10 @@ class Page extends Component {
         <StyledPage>
           <Meta />
           <Header />
-          <p>This is the page component</p>
-          <Inner>
-            { this.props.children }
-          </Inner>
+          <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>
-    )
+    );
   }
 }
 
