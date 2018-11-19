@@ -206,7 +206,7 @@ const Mutations = {
         data: { quantity: existingCartItem.quantity + 1 }
       }, info);
     }
-    
+
     return ctx.db.mutation.createCartItem({
       data: {
         user: {
@@ -216,6 +216,27 @@ const Mutations = {
           connect: { id: args.id }
         }
       }
+    }, info);
+  },
+  async removeFromCart(parent, args, ctx, info) {
+    const cartItem = await ctx.db.query.cartItems({
+      where: {
+        item: { id: args.id },
+      },
+    },
+      `{id, user { id }}`
+    );
+
+    if(!cartItem) {
+      throw new Error('No cart item found');
+    }
+
+    if(cartItem.userId !== ctx.request.userId) {
+      throw new Error('You do not have this item in your cart.');
+    }
+
+    return ctx.db.mutation.deleteCartItem({
+      where: { id: args.id }
     }, info);
   }
 };
