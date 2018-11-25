@@ -40,16 +40,18 @@ const Cart = () => (
           <header>
             <CloseButton title="close" onClick={toggleCart}>&times;</CloseButton>
             <Supreme>{me.name}s Cart</Supreme>
-            <p>You have {me.cart.length} Items{me.cart.length === 1 ? '' : 's'} in your cart.</p>
+            <p>You have {me.cart.length} Items{me.cart.length < 2 ? '' : 's'} in your cart.</p>
           </header>
           <ul>
             {me.cart.map(cartItem => <CartItem key={cartItem.id} cartItem={cartItem}/>)}
           </ul>
           <footer>
             <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-            <TakeMyMoney>
-              <SickButton>Checkout</SickButton>
-            </TakeMyMoney>
+            {me.cart.length && (
+              <TakeMyMoney>
+                <SickButton>Checkout</SickButton>
+              </TakeMyMoney>
+            )}
           </footer>
         </CartStyles>
     );
